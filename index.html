@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function search() {
+            let username = document.getElementById('username_field').value;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8000/users/" + username, true);
+            xhr.onload = function (e) {
+                if (xhr.readyState === 4) {
+                    document.getElementById("result").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.onerror = function (e) {
+                console.error(xhr.statusText);
+            };
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+<label>Имя пользователя:
+    <input id="username_field" type="text">
+</label>
+<button onclick="search()">Поиск</button>
+<div id="result"></div>
+</body>
+</html>
